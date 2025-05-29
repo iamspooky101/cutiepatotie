@@ -3,29 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <title>I Miss You</title>
-  <!-- Google Font for a romantic script -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <!-- Romantic script font -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
+      background: red;
+      overflow: hidden;
+      position: relative;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
       color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overflow: hidden;
     }
 
     h1 {
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Dancing Script', cursive;
       font-size: 4rem;
-      margin: 0;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      margin: 0 0 1rem;
+      padding: 0.3em 0.6em;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
       animation: pulse 2s ease-in-out infinite;
+      z-index: 1;
     }
 
     @keyframes pulse {
@@ -33,79 +38,59 @@
       50%      { transform: scale(1.05); }
     }
 
-    p {
-      font-size: 1.5rem;
-      margin: 0.5rem 0 2rem;
-      opacity: 0.9;
-    }
-
     img {
       max-width: 80vw;
-      height: auto;
       border-radius: 50%;
-      border: 6px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: 6px solid rgba(255,255,255,0.8);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
+      margin-bottom: 2rem;
+      z-index: 1;
     }
+    img:hover { transform: scale(1.05); }
 
-    img:hover {
-      transform: scale(1.05);
-    }
-
-    /* Floating hearts */
+    /* Heart animation */
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      transform: rotate(45deg);
-      animation: float 4s ease-in infinite;
+      font-size: 24px;
+      color: rgba(255,255,255,0.9);
+      pointer-events: none;
+      user-select: none;
+      animation: growFade 1.5s ease-out forwards;
     }
 
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 50%;
+    @keyframes growFade {
+      0%   { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(2.5); opacity: 0; }
     }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: 10px;
-      top: 0;
-    }
-
-    @keyframes float {
-      0%   { opacity: 0; transform: translateY(0) scale(0.8) rotate(45deg); }
-      10%  { opacity: 1; }
-      100% { opacity: 0; transform: translateY(-200px) scale(1.2) rotate(45deg); }
-    }
-
-    /* Generate multiple hearts */
-    /* You can add more spans in the HTML for extra hearts */
-    .heart:nth-child(1) { left: 20%; animation-delay: 0s; }
-    .heart:nth-child(2) { left: 50%; animation-delay: 1s; }
-    .heart:nth-child(3) { left: 80%; animation-delay: 2s; }
   </style>
 </head>
 <body>
   <h1>I Miss You 💖</h1>
-  <p>Every heartbeat whispers your name...</p>
   <img
     src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOThzdTBnaXFsdjYzbjF2MHB2bG1rY29oOHF3MWFhYXk1Z2ZlMjNyeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif"
     alt="Cute cat"
   />
 
-  <!-- Floating hearts -->
-  <span class="heart"></span>
-  <span class="heart"></span>
-  <span class="heart"></span>
+  <script>
+    // spawn a heart at a random position
+    function spawnHeart() {
+      const heart = document.createElement('span');
+      heart.className = 'heart';
+      heart.textContent = '❤';
+      // random position anywhere on screen
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.top  = Math.random() * 100 + '%';
+      // randomize initial size a bit
+      const size = 16 + Math.random() * 16; // 16–32px
+      heart.style.fontSize = size + 'px';
+      document.body.appendChild(heart);
+      // remove when animation completes
+      heart.addEventListener('animationend', () => heart.remove());
+    }
+
+    // spawn a new heart every 300ms
+    setInterval(spawnHeart, 300);
+  </script>
 </body>
 </html>
