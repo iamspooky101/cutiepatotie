@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <title>I Miss You</title>
-  <!-- Romantic script font -->
+  <!--  script font typeshit -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
@@ -39,7 +39,7 @@
     }
 
     img {
-      /* make the GIF about 90% of the viewport width */
+      /* gif 90% of screen ish */
       width: 90vw;
       max-width: none;
       border-radius: 50%;
@@ -83,15 +83,14 @@
       // random position anywhere on screen
       heart.style.left = Math.random() * 100 + '%';
       heart.style.top  = Math.random() * 100 + '%';
-      // randomize initial size a bit
+      // randomize size a bit
       const size = 16 + Math.random() * 16; // 16–32px
       heart.style.fontSize = size + 'px';
       document.body.appendChild(heart);
-      // remove when animation completes
+      // remove when animation done
       heart.addEventListener('animationend', () => heart.remove());
     }
 
-    // spawn a new heart every 300ms
     setInterval(spawnHeart, 300);
   </script>
 </body>
