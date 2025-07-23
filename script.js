@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const envelope = document.getElementById('envelope');
   const notes = document.getElementById('notes');
   const clearBtn = document.getElementById('clear-btn');
+  const container = document.querySelector('.container');
 
   function burstHearts(x, y) {
     for (let i = 0; i < 10; i++) {
@@ -62,12 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const note = document.createElement('div');
       note.classList.add('note');
       note.textContent = msg;
-      // clamp within viewport
+      // clamp within container bounds
       const noteW = 140, noteH = 50;
+      const cRect = container.getBoundingClientRect();
       let noteX = startX + dx - noteW/2;
       let noteY = startY + dy - noteH/2;
-      noteX = Math.max(0, Math.min(window.innerWidth - noteW, noteX));
-      noteY = Math.max(0, Math.min(window.innerHeight - noteH, noteY));
+      noteX = Math.max(cRect.left, Math.min(cRect.left + cRect.width - noteW, noteX));
+      noteY = Math.max(cRect.top, Math.min(cRect.top + cRect.height - noteH, noteY));
       note.style.left = `${noteX}px`;
       note.style.top = `${noteY}px`;
       // rotation
