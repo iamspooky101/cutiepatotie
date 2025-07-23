@@ -7,71 +7,80 @@ const messages = [
   'My heart beats for you!'
 ];
 
-const envelope = document.getElementById('envelope');
-const notes = document.getElementById('notes');
-const clearBtn = document.getElementById('clear-btn');
+// DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const envelope = document.getElementById('envelope');
+  const notes = document.getElementById('notes');
+  const clearBtn = document.getElementById('clear-btn');
 
-// Function to create heart burst
-function burstHearts(x, y) {
-  for (let i = 0; i < 10; i++) {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    document.body.appendChild(heart);
-    // random position offset
-    const dx = (Math.random() - 0.5) * 200;
-    const dy = (Math.random() - 1) * 200;
-    heart.style.left = x + 'px';
-    heart.style.top = y + 'px';
-    heart.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+  function burstHearts(x, y) {
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      document.body.appendChild(heart);
+      const dx = (Math.random() - 0.5) * 200;
+      const dy = (Math.random() - 1) * 200;
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      setTimeout(() => {
+        heart.style.transform = `translate(${dx}px, ${dy}px) scale(0)`;
+        heart.style.opacity = '0';
+      }, 20);
+      setTimeout(() => heart.remove(), 1020);
+    }
+  }
+
+  function handleLove() {
+    // animate envelope
+    envelope.classList.add('animate-envelope');
+    setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
+
+    const rect = envelope.getBoundingClientRect();
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
+
+    // burst hearts
+    burstHearts(startX, startY);
+
+    // flying message
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    const flyer = document.createElement('div');
+    flyer.classList.add('message');
+    flyer.textContent = msg;
+    document.body.appendChild(flyer);
+
+    const dx = (Math.random() - 0.5) * 300;
+    const dy = (Math.random() - 1) * 300;
+    const r = (Math.random() - 0.5) * 30;
+    flyer.style.setProperty('--dx', `${dx}px`);
+    flyer.style.setProperty('--dy', `${dy}px`);
+    flyer.style.setProperty('--r', `${r}deg`);
+
+    // after animation, stick note at flyer end
     setTimeout(() => {
-      heart.style.transform = `translate(${dx}px, ${dy}px) scale(0)`;
-      heart.style.opacity = '0';
-    }, 20);
-    // remove after animation
-    setTimeout(() => heart.remove(), 1020);
+      flyer.remove();
+      const note = document.createElement('div');
+      note.classList.add('note');
+      note.textContent = msg;
+      // clamp within viewport
+      const noteW = 140, noteH = 50;
+      let noteX = startX + dx - noteW/2;
+      let noteY = startY + dy - noteH/2;
+      noteX = Math.max(0, Math.min(window.innerWidth - noteW, noteX));
+      noteY = Math.max(0, Math.min(window.innerHeight - noteH, noteY));
+      note.style.left = `${noteX}px`;
+      note.style.top = `${noteY}px`;
+      // rotation
+      const rot = (Math.random() - 0.5) * 20;
+      note.style.setProperty('--rotate', `${rot}deg`);
+      notes.appendChild(note);
+    }, 1500);
   }
-}
 
-// Function to create and stick message
-function stickMessage(text) {
-  const note = document.createElement('div');
-  note.classList.add('note');
-  note.textContent = text;
-  // random position in viewport
-  note.style.left = Math.random() * (window.innerWidth - 150) + 'px';
-  note.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-  notes.appendChild(note);
-}
+  envelope.addEventListener('click', handleLove);
+  envelope.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleLove(); }
+  });
 
-// Handler for envelope click
-function handleLove(e) {
-  const rect = envelope.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
-  const y = rect.top + rect.height / 2;
-  burstHearts(x, y);
-  // select random message
-  const msg = messages[Math.floor(Math.random() * messages.length)];
-  // optional flying text
-  const flyer = document.createElement('div');
-  flyer.classList.add('message');
-  flyer.textContent = msg;
-  document.body.appendChild(flyer);
-  // after animation, stick as note
-  setTimeout(() => {
-    flyer.remove();
-    stickMessage(msg);
-  }, 1000);
-}
-
-envelope.addEventListener('click', handleLove);
-// keyboard accessibility
-envelope.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    handleLove();
-  }
-});
-
-// Clear all notes
-clearBtn.addEventListener('click', () => {
-  notes.innerHTML = '';
+  clearBtn.addEventListener('click', () => notes.innerHTML = '');
 });
