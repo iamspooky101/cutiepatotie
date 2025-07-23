@@ -1,97 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>I Miss You</title>
-  <!--  script font typeshit -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: red;
-      overflow: hidden;
-      position: relative;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      color: #fff;
-    }
-
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 4rem;
-      margin: 0 0 1rem;
-      padding: 0.3em 0.6em;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 8px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-      animation: pulse 2s ease-in-out infinite;
-      z-index: 1;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.05); }
-    }
-
-    img {
-      /* gif 65% of screen ish */
-      width: 65vw;
-      max-width: none;
-      border-radius: 50%;
-      border: 6px solid rgba(255,255,255,0.8);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-      margin-bottom: 2rem;
-      z-index: 1;
-    }
-    img:hover { transform: scale(1.05); }
-
-    /* Heart animation */
-    .heart {
-      position: absolute;
-      font-size: 24px;
-      color: rgba(255,255,255,0.9);
-      pointer-events: none;
-      user-select: none;
-      animation: growFade 1.5s ease-out forwards;
-    }
-
-    @keyframes growFade {
-      0%   { transform: scale(0.5); opacity: 1; }
-      100% { transform: scale(2.5); opacity: 0; }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Burst</title>
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>I Miss You 💖</h1>
-  <img
-    src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOThzdTBnaXFsdjYzbjF2MHB2bG1rY29oOHF3MWFhYXk1Z2ZlMjNyeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif"
-    alt="Cute cat"
-  />
+  <!-- Container for envelope and notes -->
+  <div class="container">
+    <!-- Envelope icon centered -->
+    <button id="envelope" aria-label="Send love" tabindex="0">
+      <!-- Inline SVG envelope -->
+      <svg width="80" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16v16H4z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    </button>
+    <!-- Clear notes button -->
+    <button id="clear-btn" aria-label="Clear messages">Clear Notes</button>
+    <!-- Area where messages will stick -->
+    <div id="notes"></div>
+  </div>
 
-  <script>
-    // spawn a heart at a random position
-    function spawnHeart() {
-      const heart = document.createElement('span');
-      heart.className = 'heart';
-      heart.textContent = '❤';
-      // random position anywhere on screen
-      heart.style.left = Math.random() * 100 + '%';
-      heart.style.top  = Math.random() * 100 + '%';
-      // randomize size a bit
-      const size = 16 + Math.random() * 16; // 16–32px
-      heart.style.fontSize = size + 'px';
-      document.body.appendChild(heart);
-      // remove when animation done
-      heart.addEventListener('animationend', () => heart.remove());
-    }
-
-    setInterval(spawnHeart, 300);
-  </script>
+  <!-- Link to external script -->
+  <script src="script.js"></script>
 </body>
 </html>
