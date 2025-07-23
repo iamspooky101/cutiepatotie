@@ -8,14 +8,19 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Main greeting headline -->
+  <h1 class="headline">hey cutieee! here are some reasons I love youyyy:</h1>
+
   <!-- Container for envelope and notes -->
   <div class="container">
-    <!-- Envelope icon centered -->
+    <!-- Cute envelope icon -->
     <button id="envelope" aria-label="Send love" tabindex="0">
-      <!-- Inline SVG envelope -->
-      <svg width="80" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 4h16v16H4z"></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
+      <!-- Inline SVG envelope with body and flap -->
+      <svg width="120" height="90" viewBox="0 0 24 24" fill="#ffe0e0" stroke="#f48fb1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Envelope body -->
+        <rect x="4" y="6" width="16" height="12" rx="2"></rect>
+        <!-- Envelope flap -->
+        <polyline class="flap" points="5,6 12,11 19,6"></polyline>
       </svg>
     </button>
     <!-- Clear notes button -->
