@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     envelope.classList.add('animate-envelope');
     setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
 
-    const rect   = envelope.getBoundingClientRect();
-    burstHearts(rect.left + rect.width/2, rect.top + rect.height/2);
+    const rect = envelope.getBoundingClientRect();
+    burstHearts(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
     // pick a random item
     const idx = Math.floor(Math.random() * items.length);
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     flyer.style.setProperty('--r',  `${r}deg`);
     setTimeout(() => flyer.remove(), 1500);
 
-    // after it flies away, stick the note
+    // after it flies away, stick the note in the free band
     setTimeout(() => {
       const note = document.createElement('div');
       note.classList.add('note');
@@ -71,11 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>${text}</p>
       `;
 
-      // random fixed position
+      // compute spawn bounds so we don't overlap header or clear button
       const NOTE_W = 140, NOTE_H = 60;
-      const x = Math.random() * (window.innerWidth - NOTE_W);
-      const y = Math.random() * (window.innerHeight - NOTE_H);
-      const rot = (Math.random() - 0.5) * 30;
+      const minY   = header.getBoundingClientRect().bottom;
+      const clearRect = clearBtn.getBoundingClientRect();
+      const maxY   = clearRect.top - NOTE_H;
+      const x      = Math.random() * (window.innerWidth - NOTE_W);
+      const y      = minY + Math.random() * Math.max(0, maxY - minY);
+      const rot    = (Math.random() - 0.5) * 30;
 
       note.style.left              = `${x}px`;
       note.style.top               = `${y}px`;
