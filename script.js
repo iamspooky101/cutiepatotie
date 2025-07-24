@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const notes       = document.getElementById('notes');
   const header      = document.querySelector('.headline');
   const bgMusic     = document.getElementById('bg-music');
+  const clickSfx    = document.getElementById('click-sfx');
   let remaining     = items.slice();
   let musicStarted  = false;
 
@@ -61,11 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLove() {
-    // start the music on first click
+    // play click SFX on every press
+    clickSfx.currentTime = 0;
+    clickSfx.play().catch(() => { /* ignore if blocked */ });
+
+    // start bg music once
     if (!musicStarted) {
-      bgMusic.play().catch(err => {
-        console.warn('Audio play was blocked:', err);
-      });
+      bgMusic.play().catch(() => { /* ignore if blocked */ });
       musicStarted = true;
     }
 
