@@ -22,7 +22,7 @@ const items = [
   },
   {
     img: 'stickers/handsome.jpg',
-    text: 'I love how handsome you are 😍👌'
+    text: 'I love how handsome you are 😍👌 '
   },
   {
     img: 'stickers/finger.jpg',
