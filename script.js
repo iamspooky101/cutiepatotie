@@ -28,6 +28,7 @@ const items = [
   { img: '', text: 'I love watching romcoms with you＼(＾▽＾)／' },
   { img: '', text: 'I love how you rizzed me (*^‿^*)' }
   { img: '', text: 'ilyyyy' }
+  { img: '', text: '' }
 
 ];
 
