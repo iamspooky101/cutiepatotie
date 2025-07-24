@@ -1,37 +1,29 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Love Burst</title>
-  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Container for headline, envelope, and notes -->
+  <!-- NOTES LAYER ABOVE EVERYTHING -->
+  <div id="notes"></div>
+
   <div class="container">
-    <!-- Main greeting headline moved inside container -->
     <h1 class="headline">hey cutieee! here are some reasons I love youyyy:</h1>
 
-    <!-- Cute envelope icon -->
     <button id="envelope" aria-label="Send love" tabindex="0">
-      <!-- Inline SVG envelope with body and flap -->
       <svg width="120" height="90" viewBox="0 0 24 24" fill="#ffe0e0" stroke="#f48fb1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <!-- Envelope body -->
         <rect x="4" y="6" width="16" height="12" rx="2"></rect>
-        <!-- Envelope flap -->
         <polyline class="flap" points="5,6 12,11 19,6"></polyline>
       </svg>
     </button>
 
-    <!-- Area where messages will stick -->
-    <div id="notes"></div>
-
-    <!-- Clear notes button -->
     <button id="clear-btn" aria-label="Clear messages">Clear Notes</button>
   </div>
 
-  <!-- Link to external script -->
   <script src="script.js"></script>
 </body>
 </html>
