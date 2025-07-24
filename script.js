@@ -1,151 +1,98 @@
-/* Reset & box-sizing */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 100%; height: 100%; overflow: hidden; }
-body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: linear-gradient(135deg, #ffe0f0 0%, #fff0e0 100%);
-  color: #c2185b;
-}
+// Array of cute messages
+const messages = [
+  'I love how you sometimes say "hey cutie"',
+  'I love how you spend time making those stickers that say "goodnight" and "imy"',
+  'I love how you always fall asleep during movies',
+  'I love how you use random numbers to laugh, like "5454354325435345"',
+  'I love how cutie patootie you are, even so far away',
+  'I love when you tell me about your day',
+  'I love how good you are at drawing and that you want to spend what little time you have making me that hoodie',
+  'I love that you spend time responding to all my TikToks',
+  'I love how not NPC you are',
+  'I love when you open up to me',
+  'I love how you make me smile every second we are on a call together',
+  'I love how you always spend time making super cool stuff for me like the book, the clay animals, and the hooooddiiieee',
+  'I love how your texts instantly make my day better'
+];
 
-/* Container flex layout */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* small space between items */
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
 
-/* Headline styling closer to envelope */
-.headline {
-  font-size: 1.4rem;
-  margin: 0;
-  padding: 0;
-}
+// DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const envelope = document.getElementById('envelope');
+  const notes = document.getElementById('notes');
+  const clearBtn = document.getElementById('clear-btn');
+  const header = document.querySelector('.headline');
 
-/* Floating background hearts */
-.container::before {
-  content: '💕';
-  position: absolute;
-  font-size: 2rem;
-  opacity: 0.2;
-  animation: floatHearts 6s infinite ease-in-out;
-}
-@keyframes floatHearts {
-  0% { transform: translate(-50vw, 50vh) rotate(0deg); opacity: 0.1; }
-  50% { opacity: 0.3; }
-  100% { transform: translate(50vw, -50vh) rotate(360deg); opacity: 0.1; }
-}
+  function burstHearts(x, y) {
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      document.body.appendChild(heart);
+      const dx = (Math.random() - 0.5) * 200;
+      const dy = (Math.random() - 0.5) * 200;
+      setTimeout(() => {
+        heart.style.transform = `translate(${dx}px, ${dy}px) scale(0)`;
+        heart.style.opacity = '0';
+      }, 20);
+      setTimeout(() => heart.remove(), 1020);
+    }
+  }
 
-/* Envelope styling */
-#envelope {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  perspective: 600px;
-  transition: transform 0.3s;
-  z-index: 10;
-}
-#envelope:hover {
-  transform: scale(1.1) rotate(-2deg);
-}
-#envelope:focus {
-  outline: 2px dashed #f48fb1;
-}
+  function handleLove() {
+    envelope.classList.add('animate-envelope');
+    setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
 
-/* Envelope animations */
-@keyframes envelopePop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
-@keyframes flapOpen { 0% { transform: rotateX(0deg); } 50% { transform: rotateX(-60deg); } 100% { transform: rotateX(0deg); } }
-.animate-envelope svg { animation: envelopePop 0.8s ease-out; }
-.animate-envelope .flap { transform-origin: top center; animation: flapOpen 1.2s ease-out; }
+    const rect = envelope.getBoundingClientRect();
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
 
-/* Heart burst animation */
-.heart {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #f06292;
-  transform: rotate(45deg);
-  animation: flyUp 1s ease-out forwards;
-}
-.heart::before, .heart::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #f06292;
-  border-radius: 50%;
-}
-.heart::before { top: -9px; left: 0; }
-.heart::after { left: 9px; top: 0; }
-@keyframes flyUp { to { transform: translateY(-150px) scale(0); opacity: 0; } }
+    // Heart burst
+    burstHearts(startX, startY);
 
-/* Flying message text */
-.message {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #880e4f;
-  animation: slideOut 1.5s ease-in-out forwards;
-}
-@keyframes slideOut {
-  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--r,0deg)); opacity: 0; }
-}
+    // Flying message
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    const flyer = document.createElement('div');
+    flyer.classList.add('message');
+    flyer.textContent = msg;
+    document.body.appendChild(flyer);
 
-/* Note styling */
-.note {
-  position: absolute;
-  width: 140px;
-  padding: 0.6rem;
-  background: #fffaf0;
-  border: 1px solid #ffd180;
-  border-left: 3px solid #ffb74d;
-  border-top: 3px solid #ffb74d;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.4px;
-  line-height: 1.2;
-  transform: rotate(var(--rotate,0deg));
-  animation: stickFadeIn 0.5s ease-out;
-  z-index: 5;
-}
-.note::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-width: 0 12px 12px 0;
-  border-style: solid;
-  border-color: transparent #ffe0b2 transparent transparent;
-}
-@keyframes stickFadeIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    const dx = (Math.random() - 0.5) * window.innerWidth;
+    const dy = (Math.random() - 0.5) * (window.innerHeight - header.getBoundingClientRect().bottom);
+    const r = (Math.random() - 0.5) * 30;
+    flyer.style.setProperty('--dx', `${dx}px`);
+    flyer.style.setProperty('--dy', `${dy}px`);
+    flyer.style.setProperty('--r', `${r}deg`);
 
-/* Clear notes button */
-#clear-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #f48fb1;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 10;
-}
-#clear-btn:hover { background: #e91e63; }
-#clear-btn:focus { outline: 2px dashed #880e4f; }
+    setTimeout(() => {
+      flyer.remove();
+      // Stick note at a truly random position within full screen below header
+      const note = document.createElement('div');
+      note.classList.add('note');
+      note.textContent = msg;
+      const NOTE_WIDTH = 140;
+      const NOTE_HEIGHT = 60;
+      const minY = header.getBoundingClientRect().bottom;
+      const maxX = window.innerWidth - NOTE_WIDTH;
+      const maxY = window.innerHeight - NOTE_HEIGHT;
+      const noteX = Math.random() * maxX;
+      const noteY = minY + Math.random() * (maxY - minY);
+      note.style.left = `${noteX}px`;
+      note.style.top = `${noteY}px`;
+      const rot = (Math.random() - 0.5) * 30;
+      note.style.setProperty('--rotate', `${rot}deg`);
+      notes.appendChild(note);
+    }, 1500);
+  }
+
+  envelope.addEventListener('click', handleLove);
+  envelope.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleLove();
+    }
+  });
+
+  clearBtn.addEventListener('click', () => notes.innerHTML = '');
+});
