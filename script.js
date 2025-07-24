@@ -17,19 +17,19 @@ const items = [
   { img: '', text: 'I love how you always spend time making super cool stuff for me like the book, the clay animals, and the hoodie 🦖📚🧸' },
   { img: '', text: 'I love how we text all day and never run out of things to say 📱✨' },
   {
-    img: 'stickers/cutie',
+    img: 'stickers/cutie.jpg',
     text: 'I love how CUTIEEEE you are ૮ ˶ᵔ ᵕ ᵔ˶ ა 💕'
   },
   {
-    img: 'stickers/handsome',
+    img: 'stickers/handsome.jpg',
     text: 'I love how handsome you are 😍👌'
   },
   {
-    img: 'stickers/finger',
+    img: 'stickers/finger.jpg',
     text: 'I love how you make all those random things ❤️❤️'
   },
   {
-    img: 'stickers/image4',
+    img: 'stickers/image4.jpg',
     text: 'I love how good it feels to hug you 🤗❤️'
   },
   {
@@ -37,19 +37,19 @@ const items = [
     text: 'I love how i love you ˃ ᵕ ་ ˂ 💗'
   },
   {
-    img: 'stickers/nerdy',
+    img: 'stickers/nerdy.jpg',
     text: 'I love how nerdy you are 🤓📚'
   },
   {
-    img: 'stickers/goodmorning',
+    img: 'stickers/goodmorning.jpg',
     text: 'I love when you text me “good morning” ☀️💛'
   },
   {
-    img: 'cake',
+    img: 'cake.jpg',
     text: 'I love how creative you are 🎨🌟'
   },
   {
-    img: 'stickers/arr',
+    img: 'stickers/arr.jpg',
     text: 'I love being around you 🥰'
   }
 ];
