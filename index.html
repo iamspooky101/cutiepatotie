@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Main greeting headline -->
-  <h1 class="headline">hey cutieee! here are some reasons I love youyyy:</h1>
-
-  <!-- Container for envelope and notes -->
+  <!-- Container for headline, envelope, and notes -->
   <div class="container">
+    <!-- Main greeting headline moved inside container -->
+    <h1 class="headline">hey cutieee! here are some reasons I love youyyy:</h1>
+
     <!-- Cute envelope icon -->
     <button id="envelope" aria-label="Send love" tabindex="0">
       <!-- Inline SVG envelope with body and flap -->
@@ -23,10 +23,12 @@
         <polyline class="flap" points="5,6 12,11 19,6"></polyline>
       </svg>
     </button>
-    <!-- Clear notes button -->
-    <button id="clear-btn" aria-label="Clear messages">Clear Notes</button>
+
     <!-- Area where messages will stick -->
     <div id="notes"></div>
+
+    <!-- Clear notes button -->
+    <button id="clear-btn" aria-label="Clear messages">Clear Notes</button>
   </div>
 
   <!-- Link to external script -->
