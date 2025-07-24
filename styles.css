@@ -27,18 +27,53 @@ body {
   padding: 0;
 }
 
-/* Floating background hearts */
-.container::before {
-  content: '💕';
+/* NOTES LAYER ON TOP */
+#notes {
   position: absolute;
-  font-size: 2rem;
-  opacity: 0.2;
-  animation: floatHearts 6s infinite ease-in-out;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; /* allow clicks through to envelope */
+  z-index: 20;
 }
-@keyframes floatHearts {
-  0% { transform: translate(-50vw, 50vh) rotate(0deg); opacity: 0.1; }
-  50% { opacity: 0.3; }
-  100% { transform: translate(50vw, -50vh) rotate(360deg); opacity: 0.1; }
+
+/* Note styling */
+.note {
+  position: absolute;
+  width: 140px;
+  padding: 0.6rem;
+  background: #fffaf0;
+  border: 1px solid #ffd180;
+  border-left: 3px solid #ffb74d;
+  border-top: 3px solid #ffb74d;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+  transform: rotate(var(--rotate,0deg));
+  animation: stickFadeIn 0.5s ease-out;
+  z-index: 25;          /* above everything */
+  pointer-events: auto; /* so images/notes can be interacted with */
+}
+.note::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 12px 12px 0;
+  border-style: solid;
+  border-color: transparent #ffe0b2 transparent transparent;
+}
+@keyframes stickFadeIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+
+/* IMAGE INSIDE NOTES */
+.note-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0.4rem;
+  border-radius: 4px;
 }
 
 /* Envelope styling */
@@ -85,6 +120,20 @@ body {
 .heart::after { left: 9px; top: 0; }
 @keyframes flyUp { to { transform: translateY(-150px) scale(0); opacity: 0; } }
 
+/* Floating background hearts */
+.container::before {
+  content: '💕';
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.2;
+  animation: floatHearts 6s infinite ease-in-out;
+}
+@keyframes floatHearts {
+  0% { transform: translate(-50vw, 50vh) rotate(0deg); opacity: 0.1; }
+  50% { opacity: 0.3; }
+  100% { transform: translate(50vw, -50vh) rotate(360deg); opacity: 0.1; }
+}
+
 /* Flying message text */
 .message {
   position: absolute;
@@ -101,36 +150,6 @@ body {
   30% { opacity: 1; }
   100% { transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--r,0deg)); opacity: 0; }
 }
-
-/* Note styling */
-.note {
-  position: absolute;
-  width: 140px;
-  padding: 0.6rem;
-  background: #fffaf0;
-  border: 1px solid #ffd180;
-  border-left: 3px solid #ffb74d;
-  border-top: 3px solid #ffb74d;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.4px;
-  line-height: 1.2;
-  transform: rotate(var(--rotate,0deg));
-  animation: stickFadeIn 0.5s ease-out;
-  z-index: 5;
-}
-.note::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-width: 0 12px 12px 0;
-  border-style: solid;
-  border-color: transparent #ffe0b2 transparent transparent;
-}
-@keyframes stickFadeIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
 
 /* Clear notes button */
 #clear-btn {
