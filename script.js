@@ -1,260 +1,178 @@
-/* Reset & viewport */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: linear-gradient(135deg, #ffe0f0 0%, #fff0e0 100%);
-  color: #c2185b;
-}
-
-/* Centered controls */
-.container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
-
-.headline,
-#envelope,
-#clear-btn {
-  z-index: 10;
-}
-
-.headline {
-  font-size: 1.4rem;
-}
-
-#envelope {
-  background: none;
-  border: none;
-  cursor: pointer;
-  perspective: 600px;
-  transition: transform .3s;
-}
-
-#envelope:hover {
-  transform: scale(1.1) rotate(-2deg);
-}
-
-#envelope:focus {
-  outline: 2px dashed #f48fb1;
-}
-
-#clear-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  padding: .5rem 1rem;
-  border: none;
-  background: #f48fb1;
-  color: #fff;
-  border-radius: 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
-}
-
-#clear-btn:hover {
-  background: #e91e63;
-}
-
-#clear-btn:focus {
-  outline: 2px dashed #880e4f;
-}
-
-/* Full‑screen notes container */
-#notes {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  /* clicks pass thru */
-  z-index: 9999;
-}
-
-/* Sticky note style */
-.note {
-  position: fixed;
-  width: 140px;
-  padding: .6rem;
-  background: #fffaf0;
-  border: 1px solid #ffd180;
-  border-left: 3px solid #ffb74d;
-  border-top: 3px solid #ffb74d;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
-  font-family: 'Courier New', monospace;
-  font-size: .8rem;
-  line-height: 1.2;
-  transform: rotate(var(--rotate, 0deg));
-  animation: stickFadeIn .5s ease-out;
-  z-index: 10000;
-  pointer-events: auto;
-}
-
-.note::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-width: 0 12px 12px 0;
-  border-style: solid;
-  border-color: transparent #ffe0b2 transparent transparent;
-}
-
-@keyframes stickFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
+// Pair each image with its exact text:
+const items = [
+  { img: 'stickers/cutie1.png', text: 'I love how you sometimes say “hey cutie” 💖' },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955442856059/image.jpg',
+    text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨'
+  },
+  { img: '', text: 'I love how you always fall asleep during movies 🎬😴' },
+  { img: '', text: 'I love how you use random numbers to laugh, like “5454354325435345” 🤣' },
+  { img: '', text: 'I love how cute you are, even when you’re far away 🌏💕' },
+  { img: '', text: 'I love when you tell me about your day ☀️🗣' },
+  { img: '', text: 'I love how good you are at drawing, and that you want to spend what little time you have making me that hoodie 🎨👕' },
+  { img: '', text: 'I love that you spend time responding to all my TikToks 📱❤️' },
+  { img: '', text: 'I love how you’re not an NPC 😂' },
+  { img: '', text: 'I love when you open up to me' },
+  { img: '', text: 'I love how you make me smile every second we’re on a call together 😄' },
+  { img: '', text: 'I love how you always spend time making super cool stuff for me like the book, the clay animals, and the hoodie 🦖📚🧸' },
+  { img: '', text: 'I love how we text all day and never run out of things to say 📱✨' },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954914639912/image.jpg',
+    text: 'I love how CUTIEEEE you are ૮ ˶ᵔ ᵕ ᵔ˶ ა 💕'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954893533256/image.jpg',
+    text: 'I love how handsome you are 😍👌'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954444611614/image.jpg',
+    text: 'I love how you make all those random things ❤️❤️'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954792743104/image.jpg',
+    text: 'I love how good it feels to hug you 🤗❤️'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954876624916/image.jpg',
+    text: 'I just love you ˃ ᵕ ་ ˂ 💗'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954872565800/image.jpg',
+    text: 'I love how nerdy you are 🤓📚'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955346522303/image.jpg',
+    text: 'I love when you text me “good morning” ☀️💛'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955602374656/image.jpg',
+    text: 'I love how creative you are 🎨🌟'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955891908608/image.jpg',
+    text: 'I love being around you 🥰'
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+];
 
-.note-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin-bottom: .4rem;
-  border-radius: 4px;
-}
+// mutable pool so each shows only once
+let remaining = items.slice();
 
-/* Heart burst */
-.heart {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #f06292;
-  transform: rotate(45deg);
-  animation: flyUp 1s ease-out forwards;
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const envelope = document.getElementById('envelope');
+  const clearBtn = document.getElementById('clear-btn');
+  const notes = document.getElementById('notes');
+  const header = document.querySelector('.headline');
 
-.heart::before,
-.heart::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #f06292;
-  border-radius: 50%;
-}
+  function burstHearts(x, y) {
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      document.body.appendChild(heart);
+      const dx = (Math.random() - 0.5) * 200;
+      const dy = (Math.random() - 0.5) * 200;
+      setTimeout(() => {
+        heart.style.transform = `translate(${dx}px, ${dy}px) scale(0)`;
+        heart.style.opacity = '0';
+      }, 20);
+      setTimeout(() => heart.remove(), 1020);
+    }
+  }
 
-.heart::before {
-  top: -9px;
-  left: 0;
-}
+  function intersects(r1, r2) {
+    return !(
+      r2.left > r1.right ||
+      r2.right < r1.left ||
+      r2.top > r1.bottom ||
+      r2.bottom < r1.top
+    );
+  }
 
-.heart::after {
-  left: 9px;
-  top: 0;
-}
+  function handleLove() {
+    if (remaining.length === 0) return;
 
-@keyframes flyUp {
-  to {
-    transform: translateY(-150px) scale(0);
-    opacity: 0;
-  }
-}
+    envelope.classList.add('animate-envelope');
+    setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
+    const er = envelope.getBoundingClientRect();
+    burstHearts(er.left + er.width / 2, er.top + er.height / 2);
 
-/* Floating hearts in background */
-.container::before {
-  content: '💕';
-  position: absolute;
-  font-size: 2rem;
-  opacity: .2;
-  animation: floatHearts 6s infinite ease-in-out;
-}
+    const i = Math.floor(Math.random() * remaining.length);
+    const { img, text } = remaining.splice(i, 1)[0];
 
-@keyframes floatHearts {
-  0% {
-    transform: translate(-50vw, 50vh) rotate(0deg);
-    opacity: .1
-  }
-  50% {
-    opacity: .3
-  }
-  100% {
-    transform: translate(50vw, -50vh) rotate(360deg);
-    opacity: .1
-  }
-}
+    // flying message
+    const flyer = document.createElement('div');
+    flyer.classList.add('message');
+    flyer.textContent = text;
+    document.body.appendChild(flyer);
+    const dx = (Math.random() - 0.5) * window.innerWidth;
+    const dy = (Math.random() - 0.5) * (window.innerHeight - header.getBoundingClientRect().bottom);
+    const r = (Math.random() - 0.5) * 30;
+    flyer.style.setProperty('--dx', `${dx}px`);
+    flyer.style.setProperty('--dy', `${dy}px`);
+    flyer.style.setProperty('--r', `${r}deg`);
+    setTimeout(() => flyer.remove(), 1500);
 
-/* Flying message */
-.message {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #880e4f;
-  animation: slideOut 1.5s ease-in-out forwards;
-}
+    // sticky note
+    setTimeout(() => {
+      const note = document.createElement('div');
+      note.classList.add('note');
+      note.style.visibility = 'hidden';
+      notes.appendChild(note);
 
-@keyframes slideOut {
-  0% {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0
-  }
-  30% {
-    opacity: 1
-  }
-  100% {
-    transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--r, 0deg));
-    opacity: 0
-  }
-}
+      // attempt to load image
+      if (img) {
+        const imgEl = new Image();
+        imgEl.crossOrigin = 'anonymous';
+        imgEl.classList.add('note-img');
+        imgEl.onload = () => finalize(imgEl, img);
+        imgEl.onerror = () => finalize(null, img);
+        imgEl.src = img;
+      } else {
+        finalize(null, img);
+      }
 
-/* Envelope animations */
-@keyframes envelopePop {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.3);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+      function finalize(imgEl, src) {
+        if (imgEl) {
+          note.appendChild(imgEl);
+        } else {
+          console.error(`❌ Failed to load image: ${src}`);
+        }
+        const p = document.createElement('p');
+        p.textContent = text;
+        note.appendChild(p);
 
-@keyframes flapOpen {
-  0% {
-    transform: rotateX(0deg);
-  }
-  50% {
-    transform: rotateX(-60deg);
-  }
-  100% {
-    transform: rotateX(0deg);
-  }
-}
+        const W = note.offsetWidth, H = note.offsetHeight;
+        const rHeader = header.getBoundingClientRect();
+        const rEnv = envelope.getBoundingClientRect();
+        const rClear = clearBtn.getBoundingClientRect();
+        let x, y, rNote;
+        do {
+          x = Math.random() * (window.innerWidth - W);
+          y = Math.random() * (window.innerHeight - H);
+          rNote = { left: x, right: x + W, top: y, bottom: y + H };
+        } while (
+          intersects(rNote, rHeader) ||
+          intersects(rNote, rEnv) ||
+          intersects(rNote, rClear)
+        );
 
-.animate-envelope svg {
-  animation: envelopePop .8s ease-out;
-}
+        note.style.left = `${x}px`;
+        note.style.top = `${y}px`;
+        note.style.visibility = 'visible';
+      }
+    }, 1600);
+  }
 
-.animate-envelope .flap {
-  transform-origin: top center;
-  animation: flapOpen 1.2s ease-out;
-}
+  envelope.addEventListener('click', handleLove);
+  envelope.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleLove();
+    }
+  });
+
+  clearBtn.addEventListener('click', () => {
+    notes.innerHTML = '';
+  });
+});
