@@ -1,80 +1,51 @@
+// script.js
 // Pair each image with its exact text:
 const items = [
   { img: '', text: 'I love how you sometimes say “hey cutie” 💖' },
-  {
-    img: 'stickers/gn',
-    text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨'
-  },
-  { img: '', text: 'I love how you always fall asleep during movies 🎬😴' },
-  { img: '', text: 'I love how you use random numbers to laugh, like “5454354325435345” 🤣' },
-  { img: '', text: 'I love how cute you are, even when you’re far away 🌏💕' },
-  { img: '', text: 'I love when you tell me about your day ☀️🗣' },
-  { img: '', text: 'I love how good you are at drawing, and that you want to spend what little time you have making me that hoodie 🎨👕' },
-  { img: '', text: 'I love that you spend time responding to all my TikToks 📱❤️' },
-  { img: '', text: 'I love how you’re not an NPC 😂' },
-  { img: '', text: 'I love when you open up to me' },
-  { img: '', text: 'I love how you make me smile every second we’re on a call together 😄' },
-  { img: '', text: 'I love how you always spend time making super cool stuff for me like the book, the clay animals, and the hoodie 🦖📚🧸' },
-  { img: '', text: 'I love how we text all day and never run out of things to say 📱✨' },
-  {
-    img: 'stickers/cutie.jpg',
-    text: 'I love how CUTIEEEE you are ૮ ˶ᵔ ᵕ ᵔ˶ ა 💕'
-  },
-  {
-    img: 'stickers/handsome.jpg',
-    text: 'I love how handsome you are 😍👌 '
-  },
-  {
-    img: 'stickers/finger.jpg',
-    text: 'I love how you make all those random things ❤️❤️'
-  },
-  {
-    img: 'stickers/image4.jpg',
-    text: 'I love how good it feels to hug you 🤗❤️'
-  },
-  {
-    img: '',
-    text: 'I love how i love you ˃ ᵕ ་ ˂ 💗'
-  },
-  {
-    img: 'stickers/nerdy.jpg',
-    text: 'I love how nerdy you are 🤓📚'
-  },
-  {
-    img: 'stickers/goodmorning.jpg',
-    text: 'I love when you text me “good morning” ☀️💛'
-  },
-  {
-    img: 'cake.jpg',
-    text: 'I love how creative you are 🎨🌟'
-  },
-  {
-    img: 'stickers/arr.jpg',
-    text: 'I love being around you 🥰'
-  }
+  { img: 'stickers/gn',  text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨' },
+  { img: '',           text: 'I love how you always fall asleep during movies 🎬😴' },
+  { img: '',           text: 'I love how you use random numbers to laugh, like “5454354325435345” 🤣' },
+  { img: '',           text: 'I love how cute you are, even when you’re far away 🌏💕' },
+  { img: '',           text: 'I love when you tell me about your day ☀️🗣' },
+  { img: '',           text: 'I love how good you are at drawing, and that you want to spend what little time you have making me that hoodie 🎨👕' },
+  { img: '',           text: 'I love that you spend time responding to all my TikToks 📱❤️' },
+  { img: '',           text: 'I love how you’re not an NPC 😂' },
+  { img: '',           text: 'I love when you open up to me' },
+  { img: '',           text: 'I love how you make me smile every second we’re on a call together 😄' },
+  { img: '',           text: 'I love how you always spend time making super cool stuff for me like the book, the clay animals, and the hoodie 🦖📚🧸' },
+  { img: '',           text: 'I love how we text all day and never run out of things to say 📱✨' },
+  { img: 'stickers/cutie.jpg',    text: 'I love how CUTIEEEE you are ૮ ˶ᵔ ᵕ ᵔ˶ ა 💕' },
+  { img: 'stickers/handsome.jpg', text: 'I love how handsome you are 😍👌' },
+  { img: 'stickers/finger.jpg',   text: 'I love how you make all those random things ❤️❤️' },
+  { img: 'stickers/image4.jpg',   text: 'I love how good it feels to hug you 🤗❤️' },
+  { img: '',                      text: 'I love how i love you ˃ ᵕ ་ ˂ 💗' },
+  { img: 'stickers/nerdy.jpg',    text: 'I love how nerdy you are 🤓📚' },
+  { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
+  { img: 'cake.jpg',              text: 'I love how creative you are 🎨🌟' },
+  { img: 'stickers/arr.jpg',      text: 'I love being around you 🥰' }
 ];
 
-// mutable pool so each shows only once
-let remaining = items.slice();
-
 document.addEventListener('DOMContentLoaded', () => {
-  const envelope = document.getElementById('envelope');
-  const clearBtn = document.getElementById('clear-btn');
-  const notes = document.getElementById('notes');
-  const header = document.querySelector('.headline');
+  const envelope    = document.getElementById('envelope');
+  const clearBtn    = document.getElementById('clear-btn');
+  const notes       = document.getElementById('notes');
+  const header      = document.querySelector('.headline');
+  const bgMusic     = document.getElementById('bg-music');
+  let remaining     = items.slice();
+  let musicStarted  = false;
 
   function burstHearts(x, y) {
     for (let i = 0; i < 10; i++) {
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.style.left = `${x}px`;
-      heart.style.top = `${y}px`;
+      heart.style.top  = `${y}px`;
       document.body.appendChild(heart);
       const dx = (Math.random() - 0.5) * 200;
       const dy = (Math.random() - 0.5) * 200;
       setTimeout(() => {
         heart.style.transform = `translate(${dx}px, ${dy}px) scale(0)`;
-        heart.style.opacity = '0';
+        heart.style.opacity   = '0';
       }, 20);
       setTimeout(() => heart.remove(), 1020);
     }
@@ -90,6 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLove() {
+    // start the music on first click
+    if (!musicStarted) {
+      bgMusic.play().catch(err => {
+        console.warn('Audio play was blocked:', err);
+      });
+      musicStarted = true;
+    }
+
     if (remaining.length === 0) return;
 
     envelope.classList.add('animate-envelope');
@@ -107,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(flyer);
     const dx = (Math.random() - 0.5) * window.innerWidth;
     const dy = (Math.random() - 0.5) * (window.innerHeight - header.getBoundingClientRect().bottom);
-    const r = (Math.random() - 0.5) * 30;
+    const r  = (Math.random() - 0.5) * 30;
     flyer.style.setProperty('--dx', `${dx}px`);
     flyer.style.setProperty('--dy', `${dy}px`);
-    flyer.style.setProperty('--r', `${r}deg`);
+    flyer.style.setProperty('--r',  `${r}deg`);
     setTimeout(() => flyer.remove(), 1500);
 
     // sticky note
@@ -120,45 +99,38 @@ document.addEventListener('DOMContentLoaded', () => {
       note.style.visibility = 'hidden';
       notes.appendChild(note);
 
-      // attempt to load image
       if (img) {
         const imgEl = new Image();
         imgEl.crossOrigin = 'anonymous';
         imgEl.classList.add('note-img');
-        imgEl.onload = () => finalize(imgEl, img);
-        imgEl.onerror = () => finalize(null, img);
-        imgEl.src = img;
+        imgEl.onload  = () => finalize(imgEl);
+        imgEl.onerror = () => finalize(null);
+        imgEl.src     = img;
       } else {
-        finalize(null, img);
+        finalize(null);
       }
 
-      function finalize(imgEl, src) {
-        if (imgEl) {
-          note.appendChild(imgEl);
-        } else {
-          console.error(`❌ Failed to load image: ${src}`);
-        }
+      function finalize(imgEl) {
+        if (imgEl) note.appendChild(imgEl);
         const p = document.createElement('p');
         p.textContent = text;
         note.appendChild(p);
 
         const W = note.offsetWidth, H = note.offsetHeight;
-        const rHeader = header.getBoundingClientRect();
-        const rEnv = envelope.getBoundingClientRect();
-        const rClear = clearBtn.getBoundingClientRect();
+        const blockers = [
+          header.getBoundingClientRect(),
+          envelope.getBoundingClientRect(),
+          clearBtn.getBoundingClientRect()
+        ];
         let x, y, rNote;
         do {
           x = Math.random() * (window.innerWidth - W);
           y = Math.random() * (window.innerHeight - H);
           rNote = { left: x, right: x + W, top: y, bottom: y + H };
-        } while (
-          intersects(rNote, rHeader) ||
-          intersects(rNote, rEnv) ||
-          intersects(rNote, rClear)
-        );
+        } while (blockers.some(b => intersects(rNote, b)));
 
-        note.style.left = `${x}px`;
-        note.style.top = `${y}px`;
+        note.style.left       = `${x}px`;
+        note.style.top        = `${y}px`;
         note.style.visibility = 'visible';
       }
     }, 1600);
