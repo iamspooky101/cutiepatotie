@@ -1,5 +1,5 @@
 /* styles.css */
-/* Reset & viewport */
+/* Reset  */
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ body {
   color: #c2185b;
 }
 
-/* Centered controls */
+/*  controls */
 .container {
   position: relative;
   display: flex;
@@ -79,7 +79,7 @@ body {
   outline: 2px dashed #880e4f;
 }
 
-/* Full‑screen notes container */
+/* Full‑screen notes  */
 #notes {
   position: fixed;
   top: 0;
