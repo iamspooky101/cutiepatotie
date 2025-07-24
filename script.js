@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clickSfx.currentTime = 0;
     clickSfx.play().catch(() => {});
 
-    // background music once
+    // background music 
     if (!musicStarted) {
       bgMusic.play().catch(() => {});
       musicStarted = true;
