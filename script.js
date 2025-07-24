@@ -18,15 +18,15 @@ const items = [
   { img: 'stickers/finger.jpg', text: 'I love how you make all those random things ❤️❤️' },
   { img: 'stickers/image4.jpg', text: 'I love how good it feels to hug you 🤗❤️' },
   { img: '', text: 'I love how i love you ˃ ᵕ ་ ˂ 💗' },
-  { img: '', text: 'I love when you send me voice messages' },
+  { img: '', text: 'I love when you send me voice messagesヽ(´▽｀)ノ' },
   { img: 'stickers/sleep', text: 'I love how cute you are when you got to sleep' },
   { img: 'stickers/nerdy.jpg', text: 'I love how nerdy you are 🤓📚' },
   { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
   { img: 'cake.jpg', text: 'I love how creative you are 🎨🌟' },
   { img: 'stickers/arr.jpg', text: 'I love being around you 🥰' },
-  { img: 'stickers/flowers.jpg', text: 'I love the flowers you made me' },
-  { img: '', text: 'I love watching romcoms with you' },
-  { img: '', text: 'I love how you rizzed me' }
+  { img: 'stickers/flowers.jpg', text: 'I love the flowers you made me(=^･ω･^=)' },
+  { img: '', text: 'I love watching romcoms with you＼(＾▽＾)／' },
+  { img: '', text: 'I love how you rizzed me (*^‿^*)' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
