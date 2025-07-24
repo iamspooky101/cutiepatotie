@@ -1,5 +1,4 @@
 // script.js
-// Pair each image with its exact text:
 const items = [
   { img: '', text: 'I love how you sometimes say “hey cutie” 💖' },
   { img: 'stickers/gn', text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨' },
@@ -24,11 +23,10 @@ const items = [
   { img: 'stickers/nerdy.jpg', text: 'I love how nerdy you are 🤓📚' },
   { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
   { img: 'cake.jpg', text: 'I love how creative you are 🎨🌟' },
-  { img: 'stickers/arr.jpg', text: 'I love being around you 🥰' }
+  { img: 'stickers/arr.jpg', text: 'I love being around you 🥰' },
   { img: 'stickers/flowers.jpg', text: 'I love the flowers you made me' },
   { img: '', text: 'I love watching romcoms with you' },
-  { img: '', text: 'I love how you rizzed me' },
-
+  { img: '', text: 'I love how you rizzed me' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,13 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.style.left = `${x}px`;
-      heart.style.top = `${y}px`;
+      heart.style.top  = `${y}px`;
       document.body.appendChild(heart);
       const dx = (Math.random() - 0.5) * 200;
       const dy = (Math.random() - 0.5) * 200;
       setTimeout(() => {
         heart.style.transform = `translate(${dx}px, ${dy}px) scale(0)`;
-        heart.style.opacity = '0';
+        heart.style.opacity   = '0';
       }, 20);
       setTimeout(() => heart.remove(), 1020);
     }
@@ -68,23 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLove() {
-    // play click SFX
-    if (clickSfx) {
-      clickSfx.currentTime = 0;
-      clickSfx.play().catch(() => {});
-    }
-    // start bg music once
-    if (!musicStarted && bgMusic) {
+    // click SFX
+    clickSfx.currentTime = 0;
+    clickSfx.play().catch(() => {});
+
+    // background music once
+    if (!musicStarted) {
       bgMusic.play().catch(() => {});
       musicStarted = true;
     }
 
-    if (remaining.length === 0) return;
+    if (!remaining.length) return;
 
     envelope.classList.add('animate-envelope');
     setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
     const er = envelope.getBoundingClientRect();
-    burstHearts(er.left + er.width / 2, er.top + er.height / 2);
+    burstHearts(er.left + er.width/2, er.top + er.height/2);
 
     const i = Math.floor(Math.random() * remaining.length);
     const { img, text } = remaining.splice(i, 1)[0];
@@ -96,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(flyer);
     const dx = (Math.random() - 0.5) * window.innerWidth;
     const dy = (Math.random() - 0.5) * (window.innerHeight - header.getBoundingClientRect().bottom);
-    const r = (Math.random() - 0.5) * 30;
+    const r  = (Math.random() - 0.5) * 30;
     flyer.style.setProperty('--dx', `${dx}px`);
     flyer.style.setProperty('--dy', `${dy}px`);
-    flyer.style.setProperty('--r', `${r}deg`);
+    flyer.style.setProperty('--r',  `${r}deg`);
     setTimeout(() => flyer.remove(), 1500);
 
     // sticky note
@@ -113,9 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgEl = new Image();
         imgEl.crossOrigin = 'anonymous';
         imgEl.classList.add('note-img');
-        imgEl.onload = () => finalize(imgEl);
+        imgEl.onload  = () => finalize(imgEl);
         imgEl.onerror = () => finalize(null);
-        imgEl.src = img;
+        imgEl.src     = img;
       } else {
         finalize(null);
       }
@@ -136,11 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
         do {
           x = Math.random() * (window.innerWidth - W);
           y = Math.random() * (window.innerHeight - H);
-          rNote = { left: x, right: x + W, top: y, bottom: y + H };
+          rNote = { left:x, right:x+W, top:y, bottom:y+H };
         } while (blockers.some(b => intersects(rNote, b)));
 
-        note.style.left = `${x}px`;
-        note.style.top = `${y}px`;
+        note.style.left       = `${x}px`;
+        note.style.top        = `${y}px`;
         note.style.visibility = 'visible';
       }
     }, 1600);
@@ -148,13 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   envelope.addEventListener('click', handleLove);
   envelope.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key==='Enter' || e.key===' ') {
       e.preventDefault();
       handleLove();
     }
   });
 
-  clearBtn.addEventListener('click', () => {
-    notes.innerHTML = '';
-  });
+  clearBtn.addEventListener('click', () => notes.innerHTML = '');
 });
