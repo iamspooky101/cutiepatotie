@@ -34,14 +34,17 @@ const items = [
     text: 'I love being around you 🥰' }
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
+// create a mutable pool of remaining items
+let remaining = items.slice();
+
+document.addEventListener('DOMContentLoaded', ()=>{
   const envelope = document.getElementById('envelope');
   const clearBtn = document.getElementById('clear-btn');
   const notes    = document.getElementById('notes');
   const header   = document.querySelector('.headline');
 
   function burstHearts(x,y){
-    for(let i=0; i<10; i++){
+    for(let i=0;i<10;i++){
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.style.left = `${x}px`;
@@ -52,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(()=>{
         heart.style.transform = `translate(${dx}px,${dy}px) scale(0)`;
         heart.style.opacity   = '0';
-      }, 20);
-      setTimeout(()=>heart.remove(), 1020);
+      },20);
+      setTimeout(()=>heart.remove(),1020);
     }
   }
 
@@ -65,22 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLove(){
-    // If we've used up all items, disable the button.
-    if(items.length === 0){
-      envelope.disabled = true;
-      envelope.style.opacity = 0.5;
-      return;
-    }
+    // if pool exhausted, do nothing (or you could reset `remaining = items.slice()` here)
+    if(remaining.length === 0) return;
 
-    // Envelope animation + hearts
+    // Envelope pop + hearts
     envelope.classList.add('animate-envelope');
-    setTimeout(()=>envelope.classList.remove('animate-envelope'), 1000);
+    setTimeout(()=>envelope.classList.remove('animate-envelope'),1000);
     const er = envelope.getBoundingClientRect();
     burstHearts(er.left + er.width/2, er.top + er.height/2);
 
-    // Pick and remove one random item
-    const idx = Math.floor(Math.random()*items.length);
-    const { img, text } = items.splice(idx, 1)[0];
+    // pick & remove a random item from remaining
+    const i = Math.floor(Math.random()*remaining.length);
+    const {img,text} = remaining.splice(i,1)[0];
 
     // Flying message
     const flyer = document.createElement('div');
@@ -90,17 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const dx = (Math.random()-0.5)*window.innerWidth;
     const dy = (Math.random()-0.5)*(window.innerHeight - header.getBoundingClientRect().bottom);
     const r  = (Math.random()-0.5)*30;
-    flyer.style.setProperty('--dx', `${dx}px`);
-    flyer.style.setProperty('--dy', `${dy}px`);
-    flyer.style.setProperty('--r',  `${r}deg`);
-    setTimeout(()=>flyer.remove(), 1500);
+    flyer.style.setProperty('--dx',`${dx}px`);
+    flyer.style.setProperty('--dy',`${dy}px`);
+    flyer.style.setProperty('--r', `${r}deg`);
+    setTimeout(()=>flyer.remove(),1500);
 
-    // After fly‑away, place sticky note avoiding overlap
+    // place the sticky note, avoiding the header & envelope & clear button
     setTimeout(()=>{
       const note = document.createElement('div');
       note.classList.add('note');
       note.innerHTML = `
-        ${img ? `<img src="${img}" class="note-img" alt="">` : ''}
+        ${img?`<img src="${img}" class="note-img" alt="">`:''}
         <p>${text}</p>
       `;
       note.style.visibility = 'hidden';
@@ -112,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const rClear  = clearBtn.getBoundingClientRect();
       let x,y, rNote;
 
-      // find a spot that doesn't touch header, envelope or clear button
       do {
         x = Math.random()*(window.innerWidth - W);
         y = Math.random()*(window.innerHeight - H);
@@ -123,23 +121,18 @@ document.addEventListener('DOMContentLoaded', () => {
         intersects(rNote, rClear)
       );
 
-      note.style.left = `${x}px`;
-      note.style.top  = `${y}px`;
+      note.style.left       = `${x}px`;
+      note.style.top        = `${y}px`;
       note.style.visibility = 'visible';
-    }, 1600);
+    },1600);
   }
 
   envelope.addEventListener('click', handleLove);
-  envelope.addEventListener('keydown', e => {
-    if((e.key==='Enter'||e.key===' ') && !envelope.disabled){
+  envelope.addEventListener('keydown', e=>{
+    if(e.key==='Enter'||e.key===' ') {
       e.preventDefault();
       handleLove();
     }
   });
-
-  clearBtn.addEventListener('click', ()=>{
-    notes.innerHTML = '';
-    // Reset pool and re-enable envelope
-    window.location.reload();
-  });
+  clearBtn.addEventListener('click', ()=>notes.innerHTML = '');
 });
