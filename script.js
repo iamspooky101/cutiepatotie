@@ -18,8 +18,8 @@ const messages = [
 // Parallel array of image URLs (one per message).  
 // Replace these with your own image paths.
 const images = [
-  'stickers/cutie1.png',
-  'stickers/goodnight.png',
+  'https://cdn.discordapp.com/attachments/1012075816047366267/1397680956055486595/image.jpg?ex=68834413&is=6881f293&hm=62479c9e02d4355cfd2ad3832a631c1abb44627b0c2b5bde21d3fd782d6c9ff2&',
+  'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955891908608/image.jpg?ex=68834413&is=6881f293&hm=74b4d71cef1cf34bbcc7fc9c997d12b5648700fe5dc85a2ab4d4b6645921de41&',
   'stickers/movie.png',
   'stickers/numbers.png',
   'stickers/faraway.png',
