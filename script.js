@@ -1,10 +1,10 @@
 // script.js
 const items = [
   { img: '', text: 'I love how you sometimes say “hey cutie” 💖' },
-  { img: 'stickers/gn', text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨' },
+  { img: 'stickers/gn.jpg', text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨' },
   { img: '', text: 'I love how you always fall asleep during movies 🎬😴' },
   { img: '', text: 'I love how you use random numbers to laugh, like “5454354325435345” 🤣' },
-  { img: '', text: 'I love how cute you are, even when you’re far away 🌏💕' },
+  { img: 'stickers/cute.jpg', text: 'I love how cute you are, even when you’re far away 🌏💕' },
   { img: '', text: 'I love when you tell me about your day ☀️🗣' },
   { img: '', text: 'I love how good you are at drawing, and that you want to spend what little time you have making me that hoodie 🎨👕' },
   { img: '', text: 'I love that you spend time responding to all my TikToks 📱❤️' },
@@ -18,8 +18,8 @@ const items = [
   { img: 'stickers/finger.jpg', text: 'I love how you make all those random things ❤️❤️' },
   { img: 'stickers/image4.jpg', text: 'I love how good it feels to hug you 🤗❤️' },
   { img: '', text: 'I love how i love you ˃ ᵕ ་ ˂ 💗' },
-  { img: '', text: 'I love when you send me voice messagesヽ(´▽｀)ノ' },
-  { img: 'stickers/sleep', text: 'I love how cute you are when you got to sleep' },
+  { img: '', text: 'I love when you send me voice messages         ヽ(´▽｀)ノ' },
+  { img: 'stickers/sleep.jpg', text: 'I love how cute you are when you got to sleep' },
   { img: 'stickers/nerdy.jpg', text: 'I love how nerdy you are 🤓📚' },
   { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
   { img: 'cake.jpg', text: 'I love how creative you are 🎨🌟' },
