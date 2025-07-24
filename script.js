@@ -34,7 +34,7 @@ const items = [
   },
   {
     img: 'stickers/notnpc.png',
-    text: 'I love how you’re not an NPC 😂🎮'
+    text: 'I love how you’re not an NPC 😂'
   },
   {
     img: 'stickers/openup.png',
@@ -62,7 +62,7 @@ const items = [
   },
   {
     img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954444611614/image.jpg',
-    text: 'I love how you make all those random things ✂️🧩'
+    text: 'I love how you make all those random things❤️❤️ '
   },
   {
     img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954792743104/image.jpg',
