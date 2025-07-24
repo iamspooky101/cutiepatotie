@@ -1,18 +1,93 @@
 // Pair each image with its exact text:
 const items = [
-  { img:'stickers/cutie1.png',     text:'I love how you sometimes say "hey cutie"' },
-  { img:'stickers/goodnight.png',  text:'I love how you spend time making those stickers that say "goodnight" and "imy"' },
-  { img:'stickers/movie.png',      text:'I love how you always fall asleep during movies' },
-  { img:'stickers/numbers.png',    text:'I love how you use random numbers to laugh, like "5454354325435345"' },
-  { img:'stickers/faraway.png',    text:'I love how cutie patootie you are, even so far away' },
-  { img:'stickers/day.png',        text:'I love when you tell me about your day' },
-  { img:'stickers/drawing.png',    text:'I love how good you are at drawing and that you want to spend what little time you have making me that hoodie' },
-  { img:'stickers/tiktok.png',     text:'I love that you spend time responding to all my TikToks' },
-  { img:'stickers/notnpc.png',     text:'I love how not NPC you are' },
-  { img:'stickers/openup.png',     text:'I love when you open up to me' },
-  { img:'stickers/smile.png',      text:'I love how you make me smile every second we are on a call together' },
-  { img:'stickers/coolstuff.png',  text:'I love how you always spend time making super cool stuff for me like the book, the clay animals, and the hooooddiiieee' },
-  { img:'stickers/texts.png',      text:'I love how your texts instantly make my day better' }
+  {
+    img: 'stickers/cutie1.png',
+    text: 'I love how you sometimes say “hey cutie” 💖'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955442856059/image.jpg',
+    text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨'
+  },
+  {
+    img: 'stickers/movie.png',
+    text: 'I love how you always fall asleep during movies 🎬😴'
+  },
+  {
+    img: 'stickers/numbers.png',
+    text: 'I love how you use random numbers to laugh, like “5454354325435345” 🤣'
+  },
+  {
+    img: 'stickers/faraway.png',
+    text: 'I love how cute you are, even when you’re far away 🌏💕'
+  },
+  {
+    img: 'stickers/day.png',
+    text: 'I love when you tell me about your day ☀️🗣'
+  },
+  {
+    img: 'stickers/drawing.png',
+    text: 'I love how good you are at drawing, and that you want to spend what little time you have making me that hoodie 🎨👕'
+  },
+  {
+    img: 'stickers/tiktok.png',
+    text: 'I love that you spend time responding to all my TikToks 📱❤️'
+  },
+  {
+    img: 'stickers/notnpc.png',
+    text: 'I love how you’re not an NPC 😂🎮'
+  },
+  {
+    img: 'stickers/openup.png',
+    text: 'I love when you open up to me '
+  },
+  {
+    img: 'stickers/smile.png',
+    text: 'I love how you make me smile every second we’re on a call together 😄'
+  },
+  {
+    img: 'stickers/coolstuff.png',
+    text: 'I love how you always spend time making super cool stuff for me like the book, the clay animals, and the hoodie 🦖📚🧸'
+  },
+  {
+    img: 'stickers/texts.png',
+    text: 'I love how we text all day and never run out of things to say 📱✨'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954914639912/image.jpg',
+    text: 'I love how CUTIEEEE you are ૮ ˶ᵔ ᵕ ᵔ˶ ა 💕'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954893533256/image.jpg',
+    text: 'I love how handsome you are 😍👌'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954444611614/image.jpg',
+    text: 'I love how you make all those random things ✂️🧩'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954792743104/image.jpg',
+    text: 'I love how good it feels to hug you 🤗❤️'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954876624916/image.jpg',
+    text: 'I just love you ˃ ᵕ ་ ˂ 💗'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680954872565800/image.jpg',
+    text: 'I love how nerdy you are 🤓📚'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955346522303/image.jpg',
+    text: 'I love when you text me “good morning” ☀️💛'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955602374656/image.jpg',
+    text: 'I love how creative you are 🎨🌟'
+  },
+  {
+    img: 'https://cdn.discordapp.com/attachments/1012075816047366267/1397680955891908608/image.jpg',
+    text: 'I love being around you 🥰'
+  }
 ];
 
 document.addEventListener('DOMContentLoaded', ()=>{
