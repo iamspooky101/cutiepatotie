@@ -1,88 +1,151 @@
-// Array of cute messages
-const messages = [
-  'You make my heart flutter!',
-  'Love is in the air!',
-  'Sending you hugs!',
-  'You are my sunshine!',
-  'My heart beats for you!'
-];
+/* Reset & box-sizing */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(135deg, #ffe0f0 0%, #fff0e0 100%);
+  color: #c2185b;
+}
 
-// DOM loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const envelope = document.getElementById('envelope');
-  const notes = document.getElementById('notes');
-  const clearBtn = document.getElementById('clear-btn');
-  const container = document.querySelector('.container');
+/* Container flex layout */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* small space between items */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
 
-  function burstHearts(x, y) {
-    for (let i = 0; i < 10; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      document.body.appendChild(heart);
-      const dx = (Math.random() - 0.5) * 200;
-      const dy = (Math.random() - 1) * 200;
-      heart.style.left = `${x}px`;
-      heart.style.top = `${y}px`;
-      setTimeout(() => {
-        heart.style.transform = `translate(${dx}px, ${dy}px) scale(0)`;
-        heart.style.opacity = '0';
-      }, 20);
-      setTimeout(() => heart.remove(), 1020);
-    }
-  }
+/* Headline styling closer to envelope */
+.headline {
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
+}
 
-  function handleLove() {
-    // animate envelope
-    envelope.classList.add('animate-envelope');
-    setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
+/* Floating background hearts */
+.container::before {
+  content: '💕';
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.2;
+  animation: floatHearts 6s infinite ease-in-out;
+}
+@keyframes floatHearts {
+  0% { transform: translate(-50vw, 50vh) rotate(0deg); opacity: 0.1; }
+  50% { opacity: 0.3; }
+  100% { transform: translate(50vw, -50vh) rotate(360deg); opacity: 0.1; }
+}
 
-    const rect = envelope.getBoundingClientRect();
-    const startX = rect.left + rect.width / 2;
-    const startY = rect.top + rect.height / 2;
+/* Envelope styling */
+#envelope {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  perspective: 600px;
+  transition: transform 0.3s;
+  z-index: 10;
+}
+#envelope:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+#envelope:focus {
+  outline: 2px dashed #f48fb1;
+}
 
-    // burst hearts
-    burstHearts(startX, startY);
+/* Envelope animations */
+@keyframes envelopePop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+@keyframes flapOpen { 0% { transform: rotateX(0deg); } 50% { transform: rotateX(-60deg); } 100% { transform: rotateX(0deg); } }
+.animate-envelope svg { animation: envelopePop 0.8s ease-out; }
+.animate-envelope .flap { transform-origin: top center; animation: flapOpen 1.2s ease-out; }
 
-    // flying message
-    const msg = messages[Math.floor(Math.random() * messages.length)];
-    const flyer = document.createElement('div');
-    flyer.classList.add('message');
-    flyer.textContent = msg;
-    document.body.appendChild(flyer);
+/* Heart burst animation */
+.heart {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #f06292;
+  transform: rotate(45deg);
+  animation: flyUp 1s ease-out forwards;
+}
+.heart::before, .heart::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #f06292;
+  border-radius: 50%;
+}
+.heart::before { top: -9px; left: 0; }
+.heart::after { left: 9px; top: 0; }
+@keyframes flyUp { to { transform: translateY(-150px) scale(0); opacity: 0; } }
 
-    const dx = (Math.random() - 0.5) * 300;
-    const dy = (Math.random() - 1) * 300;
-    const r = (Math.random() - 0.5) * 30;
-    flyer.style.setProperty('--dx', `${dx}px`);
-    flyer.style.setProperty('--dy', `${dy}px`);
-    flyer.style.setProperty('--r', `${r}deg`);
+/* Flying message text */
+.message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #880e4f;
+  animation: slideOut 1.5s ease-in-out forwards;
+}
+@keyframes slideOut {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--r,0deg)); opacity: 0; }
+}
 
-    // after animation, stick note at flyer end
-    setTimeout(() => {
-      flyer.remove();
-      const note = document.createElement('div');
-      note.classList.add('note');
-      note.textContent = msg;
-      // clamp within container bounds
-      const noteW = 140, noteH = 50;
-      const cRect = container.getBoundingClientRect();
-      let noteX = startX + dx - noteW/2;
-      let noteY = startY + dy - noteH/2;
-      noteX = Math.max(cRect.left, Math.min(cRect.left + cRect.width - noteW, noteX));
-      noteY = Math.max(cRect.top, Math.min(cRect.top + cRect.height - noteH, noteY));
-      note.style.left = `${noteX}px`;
-      note.style.top = `${noteY}px`;
-      // rotation
-      const rot = (Math.random() - 0.5) * 20;
-      note.style.setProperty('--rotate', `${rot}deg`);
-      notes.appendChild(note);
-    }, 1500);
-  }
+/* Note styling */
+.note {
+  position: absolute;
+  width: 140px;
+  padding: 0.6rem;
+  background: #fffaf0;
+  border: 1px solid #ffd180;
+  border-left: 3px solid #ffb74d;
+  border-top: 3px solid #ffb74d;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+  transform: rotate(var(--rotate,0deg));
+  animation: stickFadeIn 0.5s ease-out;
+  z-index: 5;
+}
+.note::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 12px 12px 0;
+  border-style: solid;
+  border-color: transparent #ffe0b2 transparent transparent;
+}
+@keyframes stickFadeIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
 
-  envelope.addEventListener('click', handleLove);
-  envelope.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleLove(); }
-  });
-
-  clearBtn.addEventListener('click', () => notes.innerHTML = '');
-});
+/* Clear notes button */
+#clear-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #f48fb1;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+#clear-btn:hover { background: #e91e63; }
+#clear-btn:focus { outline: 2px dashed #880e4f; }
