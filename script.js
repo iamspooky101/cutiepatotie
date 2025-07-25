@@ -16,8 +16,8 @@ const items = [
   { img: 'stickers/handsome.jpg', text: 'I love how handsome you are 😍👌' },
   { img: 'stickers/finger.jpg', text: 'I love how you make all those random things ❤️❤️' },
   { img: 'stickers/image4.jpg', text: 'I love how good it feels to hug you 🤗❤️' },
-  { img: '', text: 'I love how i love youuuu ˃ ᵕ ་ ˂ 💗' },
-  { img: '', text: 'I love when you send me voice messages :33 ヽ(´▽｀)ノ' },
+  { img: '', text: 'I love how i love youuu ˃ ᵕ ་ ˂ 💗' },
+  { img: '', text: 'I love when you send me voice messages :3 ヽ(´▽｀)ノ' },
   { img: 'stickers/sleep.jpg', text: 'I love how cute you are when you got to sleep' },
   { img: 'stickers/nerdy.jpg', text: 'I love how nerdy you are 🤓📚' },
   { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
@@ -64,28 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  function handleLove() {
-    // click SFX
-    clickSfx.currentTime = 0;
-    clickSfx.play().catch(() => {});
-
-    // background music 
-    if (!musicStarted) {
-      bgMusic.play().catch(() => {});
-      musicStarted = true;
-    }
-
-    if (!remaining.length) {
-      remaining.push({ img: '', text: 'Ilyyyyy ❤️❤️❤️' });
-    }
-
+  function createNote({ img, text }) {
     envelope.classList.add('animate-envelope');
     setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
     const er = envelope.getBoundingClientRect();
     burstHearts(er.left + er.width / 2, er.top + er.height / 2);
-
-    const i = Math.floor(Math.random() * remaining.length);
-    const { img, text } = remaining.splice(i, 1)[0];
 
     // flying message
     const flyer = document.createElement('div');
@@ -142,6 +125,28 @@ document.addEventListener('DOMContentLoaded', () => {
         note.style.visibility = 'visible';
       }
     }, 1600);
+  }
+
+  function handleLove() {
+    // click SFX
+    clickSfx.currentTime = 0;
+    clickSfx.play().catch(() => {});
+
+    // background music 
+    if (!musicStarted) {
+      bgMusic.play().catch(() => {});
+      musicStarted = true;
+    }
+
+    if (!remaining.length) {
+      const fallback = { img: '', text: 'Ilyyyyy ❤️❤️❤️' };
+      createNote(fallback);
+      return;
+    }
+
+    const i = Math.floor(Math.random() * remaining.length);
+    const note = remaining.splice(i, 1)[0];
+    createNote(note);
   }
 
   envelope.addEventListener('click', handleLove);
