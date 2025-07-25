@@ -27,8 +27,8 @@ const items = [
   { img: 'stickers/flowers.jpg', text: 'I love the flowers you made me (=^･ω･^=)' },
   { img: '', text: 'I love watching romcoms with you＼(＾▽＾)／' },
   { img: '', text: 'I love how you rizzed me (*^‿^*)' },
-  { img: '', text: 'ilyyyy' },
-  { img: '', text: '' },
+  
+  
 
 ];
 
