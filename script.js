@@ -16,8 +16,8 @@ const items = [
   { img: 'stickers/handsome.jpg', text: 'I love how handsome you are 😍👌' },
   { img: 'stickers/finger.jpg', text: 'I love how you make all those random things ❤️❤️' },
   { img: 'stickers/image4.jpg', text: 'I love how good it feels to hug you 🤗❤️' },
-  { img: '', text: 'I love how i love youuu ˃ ᵕ ་ ˂ 💗' },
-  { img: '', text: 'I love when you send me voice messages :3 ヽ(´▽｀)ノ' },
+  { img: '', text: 'I love how i love youuuuuuu ˃ ᵕ ་ ˂ 💗' },
+  { img: '', text: 'I love when you send me voice messages :33 ヽ(´▽｀)ノ' },
   { img: 'stickers/sleep.jpg', text: 'I love how cute you are when you got to sleep' },
   { img: 'stickers/nerdy.jpg', text: 'I love how nerdy you are 🤓📚' },
   { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
@@ -146,7 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!remaining.length) {
-      const fallback = { img: '', text: 'Ilyyyyy ❤️❤️❤️' };
+      const fallbackMessages = [
+        'Ilyyyyy ❤️❤️❤️',
+        'Ilyyy 🥺💕',
+        'Love you SO MUCHHH 💗💗💗',
+        'ilysm😩💕',
+        '😽💖',
+        'I love you🤗💞',
+        '💌💌💌💌💌💌💌'
+      
       createNote(fallback);
       return;
     }
