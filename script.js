@@ -22,7 +22,7 @@ const items = [
   { img: 'stickers/sleep.jpg', text: 'I love how cute you are when you got to sleep' },
   { img: 'stickers/nerdy.jpg', text: 'I love how nerdy you are 🤓📚' },
   { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
-  { img: 'cake.jpg', text: 'I love how creative you are 🎨🌟' },
+  { img: 'stickers/cake.jpg', text: 'I love how creative you are 🎨🌟' },
   { img: 'stickers/arr.jpg', text: 'I love being around you 🥰' },
   { img: 'stickers/flowers.jpg', text: 'I love the flowers you made me (=^･ω･^=)' },
   { img: '', text: 'I love watching romcoms with you＼(＾▽＾)／' },
