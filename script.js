@@ -23,7 +23,7 @@ const items = [
   { img: 'stickers/goodmorning.jpg', text: 'I love when you text me “good morning” ☀️💛' },
   { img: 'stickers/cake.jpg', text: 'I love how creative you are 🎨🌟' },
   { img: 'stickers/arr.jpg', text: 'I love being around you 🥰' },
-  { img: 'stickers/flowers.jpg', text: 'I love the super cool flowers you made me (=^･ω･^=)' },
+  { img: 'stickers/flowers.jpg', text: 'I love the flowers you made me (=^･ω･^=)' },
   { img: '', text: 'I love watching romcoms with you＼(＾▽＾)／' },
   { img: '', text: 'I love how you rizzed me (*^‿^*)' },
 ];
@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const header     = document.querySelector('.headline');
   const bgMusic    = document.getElementById('bg-music');
   const clickSfx   = document.getElementById('click-sfx');
+  clickSfx.volume = 2.0; // Make it louder
+
   let remaining    = items.slice();
   let musicStarted = false;
 
@@ -128,11 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLove() {
-    // click SFX
+    // click SFX louder (and punchier double-play)
     clickSfx.currentTime = 0;
     clickSfx.play().catch(() => {});
+    setTimeout(() => {
+      const dup = clickSfx.cloneNode();
+      dup.volume = 1.0;
+      dup.play().catch(() => {});
+    }, 25);
 
-    // background music 
+    // background music
     if (!musicStarted) {
       bgMusic.play().catch(() => {});
       musicStarted = true;
