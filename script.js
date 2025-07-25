@@ -1,4 +1,3 @@
-// script.js
 const items = [
   { img: '', text: 'I love how you sometimes say “hey cutie” 💖' },
   { img: 'stickers/gn.jpg', text: 'I love how you spend time making those stickers that say “goodnight” and “IMY” 🌙✨' },
@@ -27,9 +26,6 @@ const items = [
   { img: 'stickers/flowers.jpg', text: 'I love the flowers you made me (=^･ω･^=)' },
   { img: '', text: 'I love watching romcoms with you＼(＾▽＾)／' },
   { img: '', text: 'I love how you rizzed me (*^‿^*)' },
-  
-  
-
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,12 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
       musicStarted = true;
     }
 
-    if (!remaining.length) return;
+    if (!remaining.length) {
+      remaining.push({ img: '', text: 'Ilyyyyy ❤️❤️❤️' });
+    }
 
     envelope.classList.add('animate-envelope');
     setTimeout(() => envelope.classList.remove('animate-envelope'), 1000);
     const er = envelope.getBoundingClientRect();
-    burstHearts(er.left + er.width/2, er.top + er.height/2);
+    burstHearts(er.left + er.width / 2, er.top + er.height / 2);
 
     const i = Math.floor(Math.random() * remaining.length);
     const { img, text } = remaining.splice(i, 1)[0];
@@ -96,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(flyer);
     const dx = (Math.random() - 0.5) * window.innerWidth;
     const dy = (Math.random() - 0.5) * (window.innerHeight - header.getBoundingClientRect().bottom);
-    const r  = (Math.random() - 0.5) * 30;
+    const r = (Math.random() - 0.5) * 30;
     flyer.style.setProperty('--dx', `${dx}px`);
     flyer.style.setProperty('--dy', `${dy}px`);
-    flyer.style.setProperty('--r',  `${r}deg`);
+    flyer.style.setProperty('--r', `${r}deg`);
     setTimeout(() => flyer.remove(), 1500);
 
     // sticky note
@@ -113,9 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgEl = new Image();
         imgEl.crossOrigin = 'anonymous';
         imgEl.classList.add('note-img');
-        imgEl.onload  = () => finalize(imgEl);
+        imgEl.onload = () => finalize(imgEl);
         imgEl.onerror = () => finalize(null);
-        imgEl.src     = img;
+        imgEl.src = img;
       } else {
         finalize(null);
       }
@@ -136,11 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
         do {
           x = Math.random() * (window.innerWidth - W);
           y = Math.random() * (window.innerHeight - H);
-          rNote = { left:x, right:x+W, top:y, bottom:y+H };
+          rNote = { left: x, right: x + W, top: y, bottom: y + H };
         } while (blockers.some(b => intersects(rNote, b)));
 
-        note.style.left       = `${x}px`;
-        note.style.top        = `${y}px`;
+        note.style.left = `${x}px`;
+        note.style.top = `${y}px`;
         note.style.visibility = 'visible';
       }
     }, 1600);
@@ -148,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   envelope.addEventListener('click', handleLove);
   envelope.addEventListener('keydown', e => {
-    if (e.key==='Enter' || e.key===' ') {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       handleLove();
     }
