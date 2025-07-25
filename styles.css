@@ -93,8 +93,8 @@ body {
 /* Sticky note style */
 .note {
   position: fixed;
-  width: 140px;
-  padding: .6rem;
+  width: 180px;
+  padding: .1rem;
   background: #fffaf0;
   border: 1px solid #ffd180;
   border-left: 3px solid #ffb74d;
@@ -135,7 +135,7 @@ body {
   display: block;
   max-width: 100%;
   height: auto;
-  margin-bottom: .4rem;
+  margin-bottom: .6rem;
   border-radius: 4px;
 }
 
