@@ -35,7 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const header     = document.querySelector('.headline');
   const bgMusic    = document.getElementById('bg-music');
   const clickSfx   = document.getElementById('click-sfx');
-  clickSfx.volume = 2.0; // Make it louder
+
+  // Make sound loud and ensure it's loaded
+  clickSfx.volume = 1.0;
+  clickSfx.load();
 
   let remaining    = items.slice();
   let musicStarted = false;
@@ -130,14 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLove() {
-    // click SFX louder (and punchier double-play)
+    // safe loud click SFX
     clickSfx.currentTime = 0;
-    clickSfx.play().catch(() => {});
-    setTimeout(() => {
-      const dup = clickSfx.cloneNode();
-      dup.volume = 1.0;
-      dup.play().catch(() => {});
-    }, 25);
+    clickSfx.play().catch((err) => {
+      console.warn("Click sound blocked:", err);
+    });
 
     // background music
     if (!musicStarted) {
