@@ -28,6 +28,16 @@ const items = [
   { img: '', text: 'I love how you rizzed me (*^‿^*)' },
 ];
 
+const fallbackMessages = [
+  'Ilyyyyy ❤️❤️❤️',
+  'Ilyyy 🥺💕',
+  'Love you SO MUCHHH 💗💗💗',
+  'ilysm 😩💕',
+  '😽💖',
+  'I love you 🤗💞',
+  '💌💌💌💌💌💌💌'
+];
+
 document.addEventListener('DOMContentLoaded', () => {
   const envelope   = document.getElementById('envelope');
   const clearBtn   = document.getElementById('clear-btn');
@@ -36,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgMusic    = document.getElementById('bg-music');
   const clickSfx   = document.getElementById('click-sfx');
 
-  // Make sound loud and ensure it's loaded
   clickSfx.volume = 1.0;
   clickSfx.load();
 
@@ -133,29 +142,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLove() {
-    // safe loud click SFX
+    // play click sound
     clickSfx.currentTime = 0;
     clickSfx.play().catch((err) => {
       console.warn("Click sound blocked:", err);
     });
 
-    // background music
+    // play background music
     if (!musicStarted) {
       bgMusic.play().catch(() => {});
       musicStarted = true;
     }
 
+    // use fallback messages when items run out
     if (!remaining.length) {
-      const fallbackMessages = [
-        'Ilyyyyy ❤️❤️❤️',
-        'Ilyyy 🥺💕',
-        'Love you SO MUCHHH 💗💗💗',
-        'ilysm😩💕',
-        '😽💖',
-        'I love you🤗💞',
-        '💌💌💌💌💌💌💌'
-      
-      createNote(fallbackMessages);
+      const randomText = fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)];
+      createNote({ img: '', text: randomText });
       return;
     }
 
