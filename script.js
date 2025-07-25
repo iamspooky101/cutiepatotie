@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'I love you🤗💞',
         '💌💌💌💌💌💌💌'
       
-      createNote(fallback);
+      createNote(fallbackMessages);
       return;
     }
 
