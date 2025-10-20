@@ -1,0 +1,17 @@
+{
+  "note": "Add your songs (mp3/ogg) in this folder and list them below. Filenames are case-sensitive.",
+  "tracks": [
+    {
+      "src": "assets/music/song1.mp3",
+      "title": "Song 1"
+    },
+    {
+      "src": "assets/music/song2.mp3",
+      "title": "Song 2"
+    },
+    {
+      "src": "assets/music/song3.mp3",
+      "title": "Song 3"
+    }
+  ]
+}
